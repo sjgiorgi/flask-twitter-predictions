@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase">
+              <strong>Enter A Twitter Handle</strong>
+            </h1>
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+            <p class="text-faded mb-5">Enter a Twitter handle to get age, gender, and (fake) personality prediction based on the most recent 100 posts.</p>
+            <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.handle(size=32) }}<br>
+            {% for error in form.handle.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <p><br>
+            <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+{% endblock %}

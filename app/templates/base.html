@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+{% block head %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='vendor/magnific-popup/magnific-popup.css')}}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/creative.min.css')}}">
+    
+{% endblock %}
+
+  </head>
+
+
+
+{% block navbar %}
+  <body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{{ url_for('index') }}">Twitter Personality Predictions</a>
+        
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#page-top">Prediction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#sample">Sample</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://github.com/sjgiorgi">GitHub</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block info %}
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Insights Through Language</h2>
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-twitter text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Twitter</h3>
+              <p class="text-muted mb-0">We collect your most recent 100 tweets and count word and multi-word frequencies.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-gear text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Machine Learning</h3>
+              <p class="text-muted mb-0">State of the art language models were built using penalized regression techniques with the sklearn Python package.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-pie-chart text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Personality</h3>
+              <p class="text-muted mb-0">Built over 300 million words from 75k Facebook users. Read our <a href="http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0073791&type=printable">paper</a> on personality predictions.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-venus-mars text-primary mb-3 sr-icons"></i>
+              <h3 class="mb-3">Gender and Age</h3>
+              <p class="text-muted mb-0">Model trained on Twitter, Facebook and Blog data. Read our <a href="http://wwbp.org/papers/emnlp2014_developingLexica.pdf">paper</a> on age and gender predictions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-0" id="sample">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters popup-gallery">
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{{ url_for('sample') }}?sample_handle={{default_samples.one.user_id}}">
+              <img class="img-fluid" src="{{url_for('.static', filename='')}}{{default_samples.one.default_image}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-name">
+                    Donald Trump
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{{ url_for('sample') }}?sample_handle={{default_samples.two.user_id}}">
+              <img class="img-fluid" src="{{url_for('.static', filename='')}}{{default_samples.two.default_image}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-name">
+                    Barack Obama
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{{ url_for('sample') }}?sample_handle={{default_samples.three.user_id}}">
+              <img class="img-fluid" src="{{url_for('.static', filename='')}}{{default_samples.three.default_image}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-name">
+                    Leslie Jones
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{{ url_for('sample') }}?sample_handle={{default_samples.four.user_id}}">
+              <img class="img-fluid" src="{{url_for('.static', filename='')}}{{default_samples.four.default_image}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-name">
+                    Kanye West
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{{ url_for('sample') }}?sample_handle={{default_samples.five.user_id}}">
+              <img class="img-fluid" src="{{url_for('.static', filename='')}}{{default_samples.five.default_image}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-name">
+                    Ellen DeGeneres
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <a class="portfolio-box" href="{{ url_for('sample') }}?sample_handle={{default_samples.six.user_id}}">
+              <img class="img-fluid" src="{{url_for('.static', filename='')}}{{default_samples.six.default_image}}" alt="">
+              <div class="portfolio-box-caption">
+                <div class="portfolio-box-caption-content">
+                  <div class="project-name">
+                    Justin Bieber
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading">My Well-Being Project</h2>
+            <hr class="my-4">
+            <p class="mb-5">Pioneering something something something something something with social media.</p>
+          </div>
+        </div>
+        <div class="row no-gutters popup-gallery">
+          <div class="col-lg-4 ml-auto text-center">
+            <i class="fa fa-globe fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="http://www.something.org">www.something.org</a>
+            </p>
+          </div>
+          <div class="col-lg-4 ml-auto text-center">
+            <i class="fa fa-github fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="https://github.com/sjgiorgi">GitHub</a>
+            </p>
+          </div>
+          <div class="col-lg-4 mr-auto text-center">
+            <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+            <p>
+              <a href="mailto:something@something.org">something@something.org</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{url_for('.static', filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{{url_for('.static', filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='vendor/scrollreveal/scrollreveal.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{{url_for('.static', filename='js/creative.min.js')}}"></script>
+{% endblock %}
+
+{% block d3 %}
+{% endblock %}
+
+</html>
+

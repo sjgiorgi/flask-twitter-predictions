@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+  <body id="page-top">
+    <!-- Navigation -->
+    <nav class="bg-grey navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{{ url_for('index') }}">Twitter Personality Predictions</a>
+        
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#page-top">Prediction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#sample">Sample</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section class="text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="sample-user">
+              {% if sample_data.prediction %}
+                <img class="mx-auto rounded-circle" src="{{sample_data.profile_image}}" alt="">
+              {% else %}
+                <img class="mx-auto rounded-circle" src="{{url_for('.static', filename='img/samples/thumbnails/')}}{{sample_data.profile_image}}" alt="">
+              {% endif %}
+              
+              <h3>{{ sample_data.name }}</h3>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item text-muted">
+                  {% if sample_data.gender == "female" %}
+                    <i class="fa fa-4x fa-venus text-primary mb-3 sr-icons" title="Female"></i><br class="text-muted">Female
+                  {% else %}
+                    <i class="fa fa-4x fa-mars text-primary mb-3 sr-icons" title="Male"></i><br class="text-muted">Male
+                  {% endif %}
+                </li>
+                <li class="list-inline-item text-muted">
+                  {% if sample_data.age_cat == "young" %}
+                    <i class="fa fa-4x fa-hourglass-start text-primary mb-3 sr-icons" title="Young"></i><br>Age: {{sample_data.age}}
+                  {% elif sample_data.age_cat == "middle" %}
+                    <i class="fa fa-4x fa-hourglass-half text-primary mb-3 sr-icons" title="Middle Aged"></i><br>Age: {{sample_data.age}}
+                  {% else %}
+                    <i class="fa fa-4x fa-hourglass-end text-primary mb-3 sr-icons" title="Old"></i><br>Age: {{sample_data.age}}
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 text-center" id="chart-container">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 mx-auto text-center">
+            <p class="large text-muted">Here is some text about personality..... blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah </p>
+          </div>
+        </div>
+        <hr>
+
+        <div class="col-lg-8 mx-auto text-center">
+            <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.handle(size=32) }}<br>
+            {% for error in form.handle.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <p><br>
+            <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger">Enter A Handle</button>
+            </form>
+          </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock %}
+
+{% block d3 %}
+  
+
+  <link rel="stylesheet" href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css">
+
+  <style>
+    .radar-chart .area {
+      fill-opacity: 0.7;
+    }
+    .radar-chart.focus .area {
+      fill-opacity: 0.3;
+    }
+    .radar-chart.focus .area.focused {
+      fill-opacity: 0.9;
+    }
+    .area.user, .user .circle {
+      fill: #FFD700;
+      stroke: none;
+    }
+  </style>
+
+  <script src="http://d3js.org/d3.v3.js"></script>
+  <script src="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.js"></script>
+
+  <script>
+    RadarChart.defaultConfig.color = function() {};
+    RadarChart.defaultConfig.radius = 3;
+    RadarChart.defaultConfig.w = 350;
+    RadarChart.defaultConfig.h = 350;
+  </script>
+
+  <script>
+    var data = [
+    {
+      className: 'user', // optional can be used for styling
+      axes: [
+        {axis: "Openness", value: {{sample_data.ope}}}, 
+        {axis: "Agreeableness", value: {{sample_data.agr}}}, 
+        {axis: "Conscientiousness", value: {{sample_data.con}}},  
+        {axis: "Neuroticism", value: {{sample_data.neu}}},  
+        {axis: "Extraversion", value: {{sample_data.ext}}}
+      ]
+    },
+
+  ];
+  </script>
+
+  <script>
+    var chart = RadarChart.chart();
+    var cfg = chart.config(); // retrieve default config
+    var svg = d3.select('#chart-container').append('svg')
+      .attr('width', cfg.w )
+      .attr('height', cfg.h);
+    svg.append('g').classed('single', 1).datum(data).call(chart);
+
+
+  </script>
+{% endblock %}
